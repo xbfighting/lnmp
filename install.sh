@@ -26,15 +26,20 @@ lamp(){
     include public
     include nginx
     include php5
+    include php7
     include mysql
+    include redis
     echo "Game is over!";
-    exit;
     clear
     echo "#####################################################################"
     echo "# Auto Install LAMP(Linux + Nginx + MySQL + PHP )                   #"
     echo "# Intro:  https://diycode.me                                        #"
     echo "# Author: GufengWang <cn.wangbj@icloud.com>                         #"
     echo "#####################################################################"
+    rootness
+    load_config
+    pubs_install
+    lanp_install
 }
 
 #Run it
