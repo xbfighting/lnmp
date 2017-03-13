@@ -1,15 +1,14 @@
-public_install(){
+pubs_install(){
+    cd ${soft_dir}
+    #public install
+    yum -y install gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers openssl-devel pcre-devel zlib-devel wget gd libxml2 libxml2-devel libtool libmcrypt
     #down software
     useradd -s /sbin/nologin -M www
     cd ${soft_dir}
-    wget http://s2.wanggufeng.cn/lnmp.zip
-    unzip lnmp.zip
-    mv ./lnmp/* .
-    rm -rf lnmp lnmp.zip
-    #public install
-    yum -y install gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers openssl-devel pcre-devel zlib-devel wget gd libxml2 libxml2-devel mysql-devel libtool libmcrypt
+    wget http://s1.wanggufeng.cn/lnmp.zip
+    unzip lnmp.zip -d . && rm -rf lnmp.zip
     #tar software
-    cd ${soft_dir}
+    cd ./lnmp
     tar -zxvf memcache-2.2.7.tgz
     tar -zxvf mongo-1.4.5.tgz
     tar -zxvf nginx-1.8.0.tar.gz
@@ -18,6 +17,7 @@ public_install(){
     tar -zxvf php-5.6.8.tar.gz
     tar -zxvf redis-2.2.7.tgz
     tar -zxvf yaf-2.3.5.tgz
+    tar -zxvf redis-3.2.0.tar.gz
     unzip swoole-src-master.zip
     #rm software
     rm -rf memcache-2.2.7.tgz
@@ -29,7 +29,25 @@ public_install(){
     rm -rf redis-2.2.7.tgz
     rm -rf swoole-src-master.zip
     rm -rf yaf-2.3.5.tgz
+    rm -rf redis-3.2.0.tar.gz
     rm -rf package.xml
+    rm -rf php-5.6.8
+}
+
+lanp_install(){
+    #install_pcre
+    #install_openssl
+    #install_nginx
+    #install_mysql
+    install_php7
+    #redis_preinstall_settings
+}
+
+rootness(){
+    if [[ $EUID -ne 0 ]]; then
+       echo "Error:This script must be run as root!" 1>&2
+       exit 1
+    fi
 }
 
 boot_start(){

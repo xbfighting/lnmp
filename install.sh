@@ -25,7 +25,6 @@ lamp(){
     include config
     include public
     include nginx
-    include php5
     include php7
     include mysql
     include redis
@@ -40,6 +39,7 @@ lamp(){
     load_config
     pubs_install
     lanp_install
+    service php7-fpm start
 }
 
 #Run it

@@ -5,7 +5,7 @@ export PATH
 #   System Required:  CentOS/RadHat 5+                                          #
 #   Description:  Uninstall LAMP(Linux + Nginx + MySQL + PHP )                  #
 #   Author: Teddysun <cn.wangbj@icloud.com>                                     #
-#   Intro:  https://blog.wanggufeng.cn                                          #
+#   Intro:  https://diycode.me                                                  #
 #===============================================================================#
 #to Lowcase
 upcase_to_lowcase(){
@@ -66,14 +66,10 @@ uninstall(){
     rm -rf /usr/local/nginx /usr/sbin/nginx /var/log/nginx /etc/logrotate.d/nginx cat
     echo "Sucess"
     echo "uninstalling PHP"
-    rm -rf /usr/local/php5
     rm -rf /usr/local/php7
     rm -rf /usr/bin/php /usr/bin/php-config /usr/bin/phpize /etc/php.ini
     echo "Sucess"
     echo "uninstalling Others software"
-    [ -f /etc/init.d/memcached ] && /etc/init.d/memcached stop && boot_stop memcached
-    rm -f /etc/init.d/memcached
-    rm -fr /usr/local/memcached /usr/bin/memcached
     [ -f /etc/init.d/redis-server ] && /etc/init.d/redis-server stop && boot_stop redis-server
     rm -f /etc/init.d/redis-server
     rm -rf /usr/local/redis
