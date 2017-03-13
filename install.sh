@@ -25,7 +25,7 @@ lamp(){
     include config
     include public
     include nginx
-    include php7
+    include php
     include mysql
     include redis
     echo "Game is over!";
