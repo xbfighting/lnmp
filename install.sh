@@ -40,7 +40,10 @@ lamp(){
     public_install
     lanp_install
     clear_packet
+
     service php7-fpm start
+    /usr/local/redis/bin/redis-server /usr/local/redis/redis.conf
+
     cd ${current_dir}
 }
 
