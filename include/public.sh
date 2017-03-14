@@ -6,9 +6,9 @@ pubs_install(){
     useradd -s /sbin/nologin -M www
     cd ${soft_dir}
     wget http://s1.wanggufeng.cn/lnmp.zip
-    unzip lnmp.zip -d . && rm -rf lnmp.zip
+    unzip lnmp.zip -d ${soft_dir} && mv ./lnmp/* . && rm -rf lnmp && rm -rf lnmp.zip
     #tar software
-    cd ./lnmp
+    cd ${soft_dir}
     tar -zxvf memcache-2.2.7.tgz
     tar -zxvf mongo-1.4.5.tgz
     tar -zxvf nginx-1.8.0.tar.gz
@@ -19,7 +19,20 @@ pubs_install(){
     tar -zxvf yaf-2.3.5.tgz
     tar -zxvf redis-3.2.0.tar.gz
     unzip swoole-src-master.zip
-    #rm software
+}
+
+lanp_install(){
+    #install_pcre
+    #install_openssl
+    #install_nginx
+    #install_mysql
+    install_php7
+    #redis_preinstall_settings
+}
+
+
+clear_packet(){
+    cd ${soft_dir}
     rm -rf memcache-2.2.7.tgz
     rm -rf mongo-1.4.5.tgz
     rm -rf nginx-1.8.0.tar.gz
@@ -30,17 +43,19 @@ pubs_install(){
     rm -rf swoole-src-master.zip
     rm -rf yaf-2.3.5.tgz
     rm -rf redis-3.2.0.tar.gz
+    rm -rf php7.tar.gz
     rm -rf package.xml
-    rm -rf php-5.6.8
-}
 
-lanp_install(){
-    #install_pcre
-    #install_openssl
-    #install_nginx
-    #install_mysql
-    install_php7
-    #redis_preinstall_settings
+    #rm -rf memcache-2.2.7
+    #rm -rf mongo-1.4.5
+    #rm -rf nginx-1.8.0
+    #rm -rf openssl-1.0.1e
+    #rm -rf pcre-8.36
+    #rm -rf redis-2.2.7
+    #rm -rf redis-3.2.0
+    #rm -rf swoole-src-master
+    #rm -rf yaf-2.3.5
+    #rm -rf php-5.6.8
 }
 
 rootness(){

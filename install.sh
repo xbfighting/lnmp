@@ -39,7 +39,9 @@ lamp(){
     load_config
     pubs_install
     lanp_install
+    clear_packet
     service php7-fpm start
+    cd ${current_dir}
 }
 
 #Run it

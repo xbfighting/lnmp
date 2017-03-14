@@ -1,10 +1,11 @@
 load_config(){
+    current_dir=`pwd`
 
     #Softdir location
-    soft_dir=/usr/local/src
+    soft_dir=${current_dir}/soft
 
     #Configs location
-    config_redis=./config/redis.conf
+    config_redis=${current_dir}/config/redis.conf
 
     #Install location
     nginx_location=/usr/local/nginx

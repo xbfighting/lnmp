@@ -7,6 +7,7 @@ export PATH
 #   Author: Teddysun <cn.wangbj@icloud.com>                                     #
 #   Intro:  https://diycode.me                                                  #
 #===============================================================================#
+
 #to Lowcase
 upcase_to_lowcase(){
     words=$1
@@ -52,9 +53,16 @@ boot_stop(){
         chkconfig --del $1
     fi
 }
+kill_process(){
+    pkill -9 php
+    pkill -9 nginx
+    pkill -9 mysql
+    pkill -9 redis
+}
 
 #unstall Soft
 uninstall(){
+    rootness
     echo "uninstalling Mysqld"
     [ -f /etc/init.d/mysqld ] && /etc/init.d/mysqld stop && boot_stop mysqld
     rm -f /etc/init.d/mysqld
@@ -76,6 +84,7 @@ uninstall(){
     rm -rf /usr/local/libiconv /usr/lib64/libiconv.so.0 /usr/lib/libiconv.so.0
     rm -rf /usr/local/pcre
     rm -rf /usr/local/openssl
+    kill_process
     echo "Sucess"
     echo
     echo "Successfully uninstall LAMP!"
