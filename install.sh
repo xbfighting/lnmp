@@ -37,7 +37,7 @@ lamp(){
     echo "#####################################################################"
     rootness
     load_config
-    pubs_install
+    public_install
     lanp_install
     clear_packet
     service php7-fpm start
