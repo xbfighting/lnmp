@@ -6,6 +6,7 @@ load_config(){
 
     #Configs location
     config_redis=${current_dir}/config/redis.conf
+    config_nginx=${current_dir}/config/nginx.conf
 
     #Install location
     nginx_location=/usr/local/nginx

@@ -52,42 +52,40 @@ boot_stop(){
     elif check_sys packageManager yum;then
         chkconfig --del $1
     fi
-}
-kill_process(){
-    pkill -9 php
-    pkill -9 nginx
-    pkill -9 mysql
-    pkill -9 redis
+    if [ $1 = "php7-fpm" ]; then
+        pkill -9 php
+    else
+        pkill $1
+    fi
 }
 
 #unstall Soft
 uninstall(){
-    rootness
-    echo "uninstalling Mysqld"
+    echo ""
+    echo "uninstalling Mysqld Sucess"
     [ -f /etc/init.d/mysqld ] && /etc/init.d/mysqld stop && boot_stop mysqld
     rm -f /etc/init.d/mysqld
     rm -rf /usr/local/mysql /usr/bin/mysqldump /usr/bin/mysql /etc/my.cnf /etc/ld.so.conf.d/mysql.conf
-    echo "Sucess"
-    echo "uninstalling Nginx"
+    echo ""
+    echo "uninstalling Nginx Sucess"
     [ -f /etc/init.d/nginx ] && /etc/init.d/nginx stop && boot_stop nginx
     rm -f /etc/init.d/nginx
     rm -rf /usr/local/nginx /usr/sbin/nginx /var/log/nginx /etc/logrotate.d/nginx cat
-    echo "Sucess"
-    echo "uninstalling PHP"
-    rm -rf /usr/local/php7
+    echo ""
+    echo "uninstalling PHP Sucess"
+    [ -f /etc/init.d/php7-fpm ] && /etc/init.d/php7-fpm stop && boot_stop php7-fpm
+    rm -rf /usr/local/php
     rm -rf /usr/bin/php /usr/bin/php-config /usr/bin/phpize /etc/php.ini
-    echo "Sucess"
-    echo "uninstalling Others software"
+    echo ""
+    echo "uninstalling Others software Sucess"
     [ -f /etc/init.d/redis-server ] && /etc/init.d/redis-server stop && boot_stop redis-server
     rm -f /etc/init.d/redis-server
     rm -rf /usr/local/redis
     rm -rf /usr/local/libiconv /usr/lib64/libiconv.so.0 /usr/lib/libiconv.so.0
     rm -rf /usr/local/pcre
     rm -rf /usr/local/openssl
-    kill_process
-    echo "Sucess"
     echo
-    echo "Successfully uninstall LAMP!"
+    echo "Successfully uninstall LAMP Sucess!"
 }
 
 while :

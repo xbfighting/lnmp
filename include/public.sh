@@ -24,7 +24,7 @@ public_install(){
 lanp_install(){
     #install_pcre
     #install_openssl
-    #install_nginx
+    install_nginx
     #install_mysql
     install_php7
     #redis_preinstall_settings
