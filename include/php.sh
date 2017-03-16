@@ -1,5 +1,5 @@
 #Install php
-install_php7(){
+install_php(){
     if [ ! -d "/usr/local/php7" ]; then
         cd ${soft_dir}
         wget -S http://s2.wanggufeng.cn/php7.tar.gz -O /usr/local/src/php7.tar.gz && tar -zxvf /usr/local/src/php7.tar.gz -C /

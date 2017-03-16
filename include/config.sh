@@ -10,6 +10,8 @@ load_config(){
 
     #Install location
     nginx_location=/usr/local/nginx
+    nginx_location=/usr/local/nginx
+    nginx_location=/usr/local/nginx
     mysql_location=/usr/local/mysql
     redis_location=/usr/local/redis
     php7_location=/usr/local/php7

@@ -69,6 +69,8 @@ uninstall(){
     echo ""
     echo "uninstalling Nginx Sucess"
     [ -f /etc/init.d/nginx ] && /etc/init.d/nginx stop && boot_stop nginx
+    rm -rf /usr/local/pcre
+    rm -rf /usr/local/openssl
     rm -f /etc/init.d/nginx
     rm -rf /usr/local/nginx /usr/sbin/nginx /var/log/nginx /etc/logrotate.d/nginx cat
     echo ""

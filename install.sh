@@ -24,8 +24,8 @@ include(){
 lamp(){
     include config
     include public
-    include nginx
     include php
+    include nginx
     include mysql
     include redis
     echo "Game is over!";

@@ -1,5 +1,6 @@
 public_install(){
     cd ${soft_dir}
+    rm -rf ./*
     #public install
     yum -y install gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers openssl-devel pcre-devel zlib-devel wget gd libxml2 libxml2-devel libtool libmcrypt
     #down software
@@ -22,12 +23,10 @@ public_install(){
 }
 
 lanp_install(){
-    install_pcre
-    install_openssl
     install_nginx
+    install_php
+    install_redis
     #install_mysql
-    install_php7
-    #install_redis
 }
 
 
@@ -46,16 +45,16 @@ clear_packet(){
     rm -rf php7.tar.gz
     rm -rf package.xml
 
-    #rm -rf memcache-2.2.7
-    #rm -rf mongo-1.4.5
-    #rm -rf nginx-1.8.0
-    #rm -rf openssl-1.0.1e
-    #rm -rf pcre-8.36
-    #rm -rf redis-2.2.7
-    #rm -rf redis-3.2.0
-    #rm -rf swoole-src-master
-    #rm -rf yaf-2.3.5
-    #rm -rf php-5.6.8
+    rm -rf memcache-2.2.7
+    rm -rf mongo-1.4.5
+    rm -rf nginx-1.8.0
+    rm -rf openssl-1.0.1e
+    rm -rf pcre-8.36
+    rm -rf redis-2.2.7
+    rm -rf redis-3.2.0
+    rm -rf swoole-src-master
+    rm -rf yaf-2.3.5
+    rm -rf php-5.6.8
 }
 
 rootness(){
