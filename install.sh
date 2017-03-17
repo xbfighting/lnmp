@@ -7,7 +7,6 @@ export PATH
 #   Author: GufengWang <cn.wangbj@icloud.com>                                   #
 #   Intro:  https://diycode.me                                                  #
 #===============================================================================#
-cur_dir=`pwd`
 
 #include lamp module
 include(){
@@ -21,7 +20,7 @@ include(){
 }
 
 #lamp main process
-lamp(){
+lanp(){
     include config
     include public
     include php
@@ -35,17 +34,12 @@ lamp(){
     echo "# Intro:  https://diycode.me                                        #"
     echo "# Author: GufengWang <cn.wangbj@icloud.com>                         #"
     echo "#####################################################################"
-    rootness
     load_config
     public_install
     lanp_install
-    clear_packet
-
-    service php7-fpm start
-    /usr/local/redis/bin/redis-server /usr/local/redis/redis.conf
 
     cd ${current_dir}
 }
 
 #Run it
-lamp 2>&1 | tee -a
+lanp 2>&1 | tee -a

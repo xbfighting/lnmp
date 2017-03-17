@@ -80,11 +80,12 @@ uninstall(){
     rm -rf /usr/bin/php /usr/bin/php-config /usr/bin/phpize /etc/php.ini
     echo ""
     echo "uninstalling Others software Sucess"
-    [ -f /etc/init.d/redis-server ] && /etc/init.d/redis-server stop && boot_stop redis-server
+    [ -f /etc/init.d/redis-server ] && /etc/init.d/redis-server stop && boot_stop redis
     rm -f /etc/init.d/redis-server
     rm -rf /usr/local/redis
     rm -f /usr/bin/redis-cli
     rm -f /usr/bin/redis-server
+    echo ""
     rm -rf /usr/local/libiconv /usr/lib64/libiconv.so.0 /usr/lib/libiconv.so.0
     rm -rf /usr/local/pcre
     rm -rf /usr/local/openssl

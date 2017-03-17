@@ -10,3 +10,7 @@ config_redis(){
     ln -s ${redis_location}/bin/redis-cli /usr/bin/redis-cli
     ln -s ${redis_location}/bin/redis-server /usr/bin/redis-server
 }
+
+start_redis(){
+    /usr/local/redis/bin/redis-server /usr/local/redis/redis.conf
+}

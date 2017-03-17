@@ -23,38 +23,17 @@ public_install(){
 }
 
 lanp_install(){
+    rootness
     install_nginx
     install_php
     install_redis
     #install_mysql
+    clear_packet
 }
 
 
 clear_packet(){
-    cd ${soft_dir}
-    rm -rf memcache-2.2.7.tgz
-    rm -rf mongo-1.4.5.tgz
-    rm -rf nginx-1.8.0.tar.gz
-    rm -rf openssl-1.0.1e.tar.gz
-    rm -rf pcre-8.36.tar.gz
-    rm -rf php-5.6.8.tar.gz
-    rm -rf redis-2.2.7.tgz
-    rm -rf swoole-src-master.zip
-    rm -rf yaf-2.3.5.tgz
-    rm -rf redis-3.2.0.tar.gz
-    rm -rf php7.tar.gz
-    rm -rf package.xml
-
-    rm -rf memcache-2.2.7
-    rm -rf mongo-1.4.5
-    rm -rf nginx-1.8.0
-    rm -rf openssl-1.0.1e
-    rm -rf pcre-8.36
-    rm -rf redis-2.2.7
-    rm -rf redis-3.2.0
-    rm -rf swoole-src-master
-    rm -rf yaf-2.3.5
-    rm -rf php-5.6.8
+    rm -rf ${soft_dir}/*
 }
 
 rootness(){

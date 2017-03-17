@@ -4,6 +4,7 @@ install_php(){
         cd ${soft_dir}
         wget -S http://s2.wanggufeng.cn/php7.tar.gz -O /usr/local/src/php7.tar.gz && tar -zxvf /usr/local/src/php7.tar.gz -C /
         config_php
+        start_php
     fi
 }
 
@@ -19,4 +20,8 @@ config_php(){
     chmod 755 /etc/init.d/php7-fpm
     chkconfig --add php7-fpm
     chkconfig --level 3 php7-fpm on
+}
+
+start_php(){
+    service php7-fpm start
 }
