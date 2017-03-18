@@ -4,27 +4,27 @@ public_install(){
     #public install
     yum -y install gcc zip unzip wget gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers openssl-devel pcre-devel zlib-devel wget gd libxml2 libxml2-devel libtool libmcrypt
     #down software
-    untar http://s0.diycode.me/memcache-2.2.7.tgz
-    untar http://s0.diycode.me/nginx-1.8.0.tar.gz
-    untar http://s0.diycode.me/pcre-8.36.tar.gz
-    untar http://s0.diycode.me/redis-3.2.0.tar.gz
-    untar http://s0.diycode.me/yaf-2.3.5.tgz
-    untar http://s0.diycode.me/mongo-1.4.5.tgz
-    untar http://s0.diycode.me/openssl-1.0.1e.tar.gz
-    untar http://s0.diycode.me/php-5.6.8.tar.gz
-    untar http://s0.diycode.me/redis-2.2.7.tgz
-    untar http://s0.diycode.me/swoole-src-master.zip
-    untar http://s0.diycode.me/swoole-src-master.zip
+    untar ${download_root_url}/mysql-5.6.34.tar.gz
+    untar ${download_root_url}/memcache-2.2.7.tgz
+    untar ${download_root_url}/nginx-1.8.0.tar.gz
+    untar ${download_root_url}/pcre-8.36.tar.gz
+    untar ${download_root_url}/redis-3.2.0.tar.gz
+    untar ${download_root_url}/yaf-2.3.5.tgz
+    untar ${download_root_url}/mongo-1.4.5.tgz
+    untar ${download_root_url}/openssl-1.0.1e.tar.gz
+    untar ${download_root_url}/php-5.6.8.tar.gz
+    untar ${download_root_url}/redis-2.2.7.tgz
+    untar ${download_root_url}/swoole-src-master.zip
 }
 
 lanp_install(){
     install_tool
     rootness
     sync_time
+    install_redis
     install_nginx
     install_php
-    install_redis
-    #install_mysql
+    install_mysql
     clear_packet
 }
 
@@ -40,6 +40,7 @@ clear_packet(){
     rm -rf ${soft_dir}/swoole-src-master
     rm -rf ${soft_dir}/php-5.6.8
     rm -rf ${soft_dir}/yaf-2.3.5
+    rm -rf ${soft_dir}/mysql-5.6.34
     rm -rf ${soft_dir}/package.xml
 }
 
@@ -100,6 +101,51 @@ sync_time(){
     ntpdate -v time.nist.gov
     /sbin/hwclock -w
     echo "Sync time completed..."
+}
+
+#Check system
+check_sys(){
+    local checkType=$1
+    local value=$2
+    local release=''
+    local systemPackage=''
+
+    if [[ -f /etc/redhat-release ]]; then
+        release="centos"
+        systemPackage="yum"
+    elif cat /etc/issue | grep -Eqi "debian"; then
+        release="debian"
+        systemPackage="apt"
+    elif cat /etc/issue | grep -Eqi "ubuntu"; then
+        release="ubuntu"
+        systemPackage="apt"
+    elif cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
+        release="centos"
+        systemPackage="yum"
+    elif cat /proc/version | grep -Eqi "debian"; then
+        release="debian"
+        systemPackage="apt"
+    elif cat /proc/version | grep -Eqi "ubuntu"; then
+        release="ubuntu"
+        systemPackage="apt"
+    elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
+        release="centos"
+        systemPackage="yum"
+    fi
+
+    if [[ ${checkType} == "sysRelease" ]]; then
+        if [ "$value" == "$release" ]; then
+            return 0
+        else
+            return 1
+        fi
+    elif [[ ${checkType} == "packageManager" ]]; then
+        if [ "$value" == "$systemPackage" ]; then
+            return 0
+        else
+            return 1
+        fi
+    fi
 }
 
 check_command_exist(){

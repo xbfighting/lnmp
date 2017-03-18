@@ -18,15 +18,15 @@ install_openssl(){
 
 #Install nginx
 install_nginx(){
-    install_pcre
-    install_openssl
     if [ ! -d "/usr/local/nginx" ]; then
+        install_pcre
+        install_openssl
         cd ${soft_dir}/nginx-1.8.0
         ./configure --prefix=/usr/local/nginx --with-openssl=${soft_dir}/openssl-1.0.1e --with-pcre=${soft_dir}/pcre-8.36 --with-http_ssl_module --user=www --group=www
         make && make install
+        config_nginx
+        start_nginx
     fi
-    config_nginx
-    start_nginx
 }
 
 #Config nginx

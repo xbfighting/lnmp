@@ -32,6 +32,7 @@ clear_packet(){
 }
 
 
+
 #chk System
 check_sys(){
     local checkType=$1

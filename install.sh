@@ -24,10 +24,10 @@ include(){
 lanp(){
     include config
     include public
-    include php
-    include nginx
-    include mysql
     include redis
+    include nginx
+    include php
+    include mysql
     echo "Game is over!";
     clear
     echo "#####################################################################"
@@ -40,6 +40,7 @@ lanp(){
     lanp_install
     cd ${current_dir}
     get_os_info
+    echo ""
 }
 
 #Run it

@@ -4,7 +4,7 @@ load_config(){
     soft_dir=${current_dir}/soft
 
     #Download URL
-    download_root_url="http://s0.diycode.me/"
+    download_root_url="http://s0.diycode.me"
 
     #Configs location
     config_redis=${current_dir}/config/redis.conf

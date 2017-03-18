@@ -1,9 +1,11 @@
 #Install redis
 install_redis(){
-    cd ${soft_dir}/redis-3.2.0
-    make && make PREFIX=${redis_location} install
-    config_redis
-    start_redis
+    if [ ! -d "/usr/local/redis" ]; then
+        cd ${soft_dir}/redis-3.2.0
+        make && make PREFIX=${redis_location} install
+        config_redis
+        start_redis
+    fi
 }
 
 config_redis(){
