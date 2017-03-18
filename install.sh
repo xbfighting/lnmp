@@ -7,6 +7,7 @@ export PATH
 #   Author: GufengWang <cn.wangbj@icloud.com>                                   #
 #   Intro:  https://diycode.me                                                  #
 #===============================================================================#
+cur_dir=`pwd`
 
 #include lamp module
 include(){
@@ -37,8 +38,8 @@ lanp(){
     load_config
     public_install
     lanp_install
-
     cd ${current_dir}
+    get_os_info
 }
 
 #Run it

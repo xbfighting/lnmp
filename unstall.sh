@@ -8,11 +8,29 @@ export PATH
 #   Intro:  https://diycode.me                                                  #
 #===============================================================================#
 
+
 #to Lowcase
 upcase_to_lowcase(){
     words=$1
     echo $words | tr '[A-Z]' '[a-z]'
 }
+
+clear_packet(){
+    rm -rf ${soft_dir}/memcache-2.2.7
+    rm -rf ${soft_dir}/mongo-1.4.5
+    rm -rf ${soft_dir}/nginx-1.8.0
+    rm -rf ${soft_dir}/openssl-1.0.1e
+    rm -rf ${soft_dir}/pcre-8.36
+    rm -rf ${soft_dir}/php7.tar.g
+    rm -rf ${soft_dir}/redis-2.2.7
+    rm -rf ${soft_dir}/redis-3.2.0
+    rm -rf ${soft_dir}/swoole-src-master
+    rm -rf ${soft_dir}/php-5.6.8
+    rm -rf ${soft_dir}/yaf-2.3.5
+    rm -rf ${soft_dir}/mysql-5.6.34
+    rm -rf ${soft_dir}/package.xml
+}
+
 
 #chk System
 check_sys(){
@@ -54,6 +72,8 @@ boot_stop(){
     fi
     if [ $1 = "php7-fpm" ]; then
         pkill -9 php
+    elif [ $1 = "redis-server" ]; then
+        pkill -9 redis
     else
         pkill $1
     fi
@@ -80,7 +100,7 @@ uninstall(){
     rm -rf /usr/bin/php /usr/bin/php-config /usr/bin/phpize /etc/php.ini
     echo ""
     echo "uninstalling Others software Sucess"
-    [ -f /etc/init.d/redis-server ] && /etc/init.d/redis-server stop && boot_stop redis
+    [ -f /etc/init.d/redis-server ] && /etc/init.d/redis-server stop && boot_stop redis-server
     rm -f /etc/init.d/redis-server
     rm -rf /usr/local/redis
     rm -f /usr/bin/redis-cli
@@ -91,6 +111,10 @@ uninstall(){
     rm -rf /usr/local/openssl
     echo
     echo "Successfully uninstall LAMP Sucess!"
+    echo
+    current_dir=`pwd`
+    soft_dir=${current_dir}/soft
+    clear_packet
 }
 
 while :
