@@ -3,6 +3,7 @@ public_install(){
     rm -rf ./*
     #public install
     yum -y install gcc zip unzip wget gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers openssl-devel pcre-devel zlib-devel wget gd libxml2 libxml2-devel libtool libmcrypt
+    useradd -s /sbin/nologin -M www
     #down software
     untar ${download_root_url}/mysql-5.6.34.tar.gz
     untar ${download_root_url}/memcache-2.2.7.tgz
