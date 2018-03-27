@@ -20,63 +20,63 @@ mysqlPWD=$(echo -n ${RANDOM} | md5sum | cut -b -16)
 
 # 输出正确信息
 showOk(){
-    echo -e "\\033[34m[OK]\\033[0m $1"
+  echo -e "\\033[34m[OK]\\033[0m $1"
 }
 
 # 输出错误信息
 showError(){
-    echo -e "\\033[31m[ERROR]\\033[0m $1"
+  echo -e "\\033[31m[ERROR]\\033[0m $1"
 }
 
 # 输出提示信息
 showNotice(){
-    echo -e "\\033[36m[NOTICE]\\033[0m $1"
+  echo -e "\\033[36m[NOTICE]\\033[0m $1"
 }
 
 
 # 安装
 runInstall(){
-    startDate=$(date)
-    startDateSecond=$(date +%s)
+  startDate=$(date)
+  startDateSecond=$(date +%s)
 
-    showNotice 'Installing...'
+  showNotice 'Installing...'
 
-    showNotice 'Please input server IPv4 Address'
-    read -p "IP address: " -r -e -i "${ipAddress}" ipAddress
-    if [ "${ipAddress}" = '' ]; then
+  showNotice 'Please input server IPv4 Address'
+  read -p "IP address: " -r -e -i "${ipAddress}" ipAddress
+  if [ "${ipAddress}" = '' ]; then
     showError 'Invalid IP Address'
     exit
-    fi
+  fi
 
-    #安装nginx
-    sudo yum install nginx 
-    #启动nginx
-    sudo service nginx start
-    
-    #安装php 和php-fpm软件包
-    sudo yum -y install php56 php56-fpm
-    
-    #启动php56-fpm服务
-    sudo service php-fpm start
+  #安装nginx
+  sudo yum install nginx 
+  #启动nginx
+  sudo service nginx start
+  
+  #安装php 和php-fpm软件包
+  sudo yum -y install php56 php56-fpm
+  
+  #启动php56-fpm服务
+  sudo service php-fpm start
 
-    # 安装mysql
-    sudo yum -y install mysql
+  # 安装mysql
+  sudo yum -y install mysql
 
-    #安装 mysql56-server
-    sudo yum -y install mysql56-server
+  #安装 mysql56-server
+  sudo yum -y install mysql56-server
 
-    #mysql初始化，在mysql中建立起系统表
-    sudo mysql_install_db
+  #mysql初始化，在mysql中建立起系统表
+  sudo mysql_install_db
 
-    #安装php-mysqlnd 扩展
-    sudo yum -y install php56-mysqlnd
+  #安装php-mysqlnd 扩展
+  sudo yum -y install php56-mysqlnd
 
-    #重启php-fpm服务进程
-    sudo service php-fpm restart
+  #重启php-fpm服务进程
+  sudo service php-fpm restart
 
-    sudo yum remove -y nginx php56 php56-server php56-mysqlnd mysql
+  sudo yum remove -y nginx php56 php56-server php56-mysqlnd mysql
 
-    if [[ -f "/usr/sbin/mysqld_safe" || -f "/usr/sbin/php-fpm" || -f "/usr/sbin/nginx" ]]; then
+  if [[ -f "/usr/sbin/mysqld_safe" || -f "/usr/sbin/php-fpm" || -f "/usr/sbin/nginx" ]]; then
     echo "================================================================"
     echo -e "\\033[42m [LNMP] Install completed. \\033[0m"
 
@@ -92,7 +92,7 @@ runInstall(){
     echo -e "\\033[34m MySQL User: \\033[0m root"
     echo -e "\\033[34m MySQL Password: \\033[0m ${mysqlPWD}"
     /usr/sbin/mysqld -V
-    
+  
 
     echo "Start time: ${startDate}"
     echo "Completion time: $(date) (Use: $((($(date +%s)-startDateSecond)/60)) minute)"
