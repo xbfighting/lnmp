@@ -36,7 +36,7 @@ runInstall(){
       exit
     fi
     #安装nginx
-    sudo yum install nginx
+    sudo yum -y install nginx
     #启动nginx
     sudo service nginx start
     #安装php 和php-fpm软件包
@@ -53,7 +53,7 @@ runInstall(){
     sudo yum -y install php-mysqlnd
     #重启php-fpm服务进程
     sudo service php-fpm restart
-    sudo yum remove -y nginx php php-server php-mysqlnd mysql
+    # sudo yum remove -y nginx php php-server php-mysqlnd mysql
     if [[ -f "/usr/sbin/mysqld_safe" || -f "/usr/sbin/php-fpm" || -f "/usr/sbin/nginx" ]]; then
       echo "================================================================"
       echo -e "\\033[42m [LNMP] Install completed. \\033[0m"

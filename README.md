@@ -24,3 +24,4 @@ LAMP is a powerful bash script for the installation of Nginx + PHP + MySQL and s
 * 保持文章原文，不作修改。
 * 明确署名，即至少注明 `作者：王谷峰` 字样以及文章的原始链接，且不得使用 `rel="nofollow"` 标记。
 
+ 
