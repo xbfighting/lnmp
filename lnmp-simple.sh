@@ -11,7 +11,7 @@
 #
 # 检查 root 权限
 [ "$(id -g)" != '0' ] && die 'Script must be run as root.'
-# 声明变量
+# 声明变量 
 ipAddress=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^192\\.168|^172\\.1[6-9]\\.|^172\\.2[0-9]\\.|^172\\.3[0-2]\\.|^10\\.|^127\\.|^255\\." | head -n 1) || '0.0.0.0'
 mysqlPWD=$(echo -n ${RANDOM} | md5sum | cut -b -16)
 runInstall(){
