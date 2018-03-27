@@ -14,6 +14,9 @@
 # 声明变量
 ipAddress=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^192\\.168|^172\\.1[6-9]\\.|^172\\.2[0-9]\\.|^172\\.3[0-2]\\.|^10\\.|^127\\.|^255\\." | head -n 1) || '0.0.0.0'
 mysqlPWD=$(echo -n ${RANDOM} | md5sum | cut -b -16)
+showOk(){
+  echo -e "\\033[34m[OK]\\033[0m $1"
+}
 # 输出错误信息
 showError(){
   echo -e "\\033[31m[ERROR]\\033[0m $1"
@@ -26,9 +29,9 @@ showNotice(){
 runInstall(){
   startDate=$(date)
   startDateSecond=$(date +%s)
-  
+
   showNotice 'Installing...'
-  
+
   showNotice 'Please input server IPv4 Address'
     read -p "IP address: " -r -e -i "${ipAddress}" ipAddress
     if [ "${ipAddress}" = '' ]; then
@@ -63,13 +66,13 @@ runInstall(){
       /usr/sbin/nginx -v
       echo -e "\\033[34m PHP: \\033[0m /etc/php-fpm.d/"
       /usr/sbin/php-fpm -v
-      
+
     echo -e "\\033[34m MySQL Data: \\033[0m /var/lib/mysql/"
         echo -e "\\033[34m MySQL User: \\033[0m root"
         echo -e "\\033[34m MySQL Password: \\033[0m ${mysqlPWD}"
         /usr/sbin/mysqld -V
-      
-        
+
+
     echo "Start time: ${startDate}"
         echo "Completion time: $(date) (Use: $((($(date +%s)-startDateSecond)/60)) minute)"
         echo "Use: $((($(date +%s)-startDateSecond)/60)) minute"
@@ -80,4 +83,3 @@ runInstall(){
         echo "Please contact us: https://github.com/maicong/LNMP/issues"
       fi
     }
-    
