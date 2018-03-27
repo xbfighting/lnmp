@@ -39,24 +39,28 @@ runInstall(){
     sudo yum -y install nginx
     #启动nginx
     sudo service nginx start
+
     #安装php 和php-fpm软件包
     sudo yum -y install php php-fpm
     #启动php-fpm服务
     sudo service php-fpm start
+
     #安装mysql
-    sudo yum -y install mysql
-    #安装 mysql-server
     sudo yum -y install mysql-server
-    #mysql初始化，在mysql中建立起系统表
-    sudo mysql_install_db
+    #启动mysql
+    sudo service mysqld start
+    #执行mysl安全检查
+    sudo mysql_secure_installation
+
     #安装php-mysqlnd 扩展
     sudo yum -y install php-mysqlnd
+    
     #重启php-fpm服务进程
     sudo service php-fpm restart
-    # sudo yum remove -y nginx php php-server php-mysqlnd mysql
+
     if [[ -f "/usr/sbin/mysqld_safe" || -f "/usr/sbin/php-fpm" || -f "/usr/sbin/nginx" ]]; then
       echo "================================================================"
-      echo -e "\\033[42m [LNMP] Install completed. \\033[0m"
+      echo -e "\\033[42m Install completed. \\033[0m"
       echo -e "\\033[34m WebSite: \\033[0m http://${ipAddress}"
       echo -e "\\033[34m WebDir: \\033[0m /home/wwwroot/"
       echo -e "\\033[34m Nginx: \\033[0m /etc/nginx/"
@@ -69,8 +73,18 @@ runInstall(){
       echo "Use: $((($(date +%s)-startDateSecond)/60)) minute"
       echo "================================================================"
      else
-      echo -e "\\033[41m [LNMP] Sorry, Install Failed. \\033[0m"
+      echo -e "\\033[41m Sorry, Install Failed. \\033[0m"
     fi
+}
+runUnstall(){
+  showNotice 'Unstalling...'  
+  sudo yum remove -y nginx
+  sudo yum remove -y php php-fpm
+  sudo yum remove -y mysql-server php-mysqlnd
+  sudo rm -fr /var/lib/mysql/*  
+  sudo rm /var/lock/subsys/mysqld   
+  sudo killall mysqld  
+  echo -e "\\033[42m Unstall completed. \\033[0m"
 }
 #run install
 runInstall
